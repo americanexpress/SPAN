@@ -1,0 +1,54 @@
+#
+# Copyright 2020 American Express Travel Related Services Company, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+# in compliance with the License. You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software distributed under the License
+# is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+# or implied. See the License for the specific language governing permissions and limitations under
+# the License.
+#
+
+SPANConfig:
+  SPANDatabaseConfig:
+    SPAN-EMPLOYEE:
+      datasource_details:
+        hostname: "example.com"
+        port: "7320"
+        database: "DATABASE1"
+        user: "test123"
+        password: "pass123"
+        maxIdle: 10
+        maxActive: 1000
+        minIdle: 10
+        initialSize: 20
+        maxWaitForConnection: 3000 # in milliseconds
+        validationQuery: select 1
+        validationQueryTimeout: 10 #in seconds
+        timeBetweenEvictionRunsMillis: 20000 # in milliseconds
+      sp_details:
+        EMPLOYEE-DETAILS:
+          schema: "GRFJ19"
+          procedure: "GVSPTRAN"
+        DEPARTMENT-DETAILS:
+          schema: "GRFJ17"
+          procedure: "GVSPPROM"
+    SPAN-DEPARTMENTS:
+      datasource_details:
+        hostname: "example.com"
+        port: "7320"
+        database: "DATABASE1"
+        user: "test1234"
+        password: "pass1234"
+      sp_details:
+        DPEARTMENT-MASTER:
+          schema: "GRFJ17"
+          procedure: "GVSPMRT1"
+        DPEARTMENT-ALL-DETAILS:
+          schema: "GRFJ17"
+          procedure: "L6RWDSMY"
+
+

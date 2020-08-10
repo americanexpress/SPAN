@@ -1,0 +1,7 @@
+.idea
+target/
+.classpath
+.project
+.settings/
+.span.iml
+span.iml
