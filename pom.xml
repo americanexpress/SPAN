@@ -25,6 +25,27 @@
     <name>span</name>
     <url>http://maven.apache.org</url>
 
+    <scm>
+        <url>https://github.com/americanexpress/span</url>
+        <connection>scm:git:git://github.com/americanexpress/span.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/americanexpress/span.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/americanexpress/span/issues</url>
+    </issueManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>bintray-americanexpress-maven</id>
+            <name>americanexpress-maven</name>
+            <url>https://api.bintray.com/maven/americanexpress/maven/com.americanexpress.span/;publish=1</url>
+        </repository>
+    </distributionManagement>
+
+
     <build>
         <plugins>
             <plugin>
