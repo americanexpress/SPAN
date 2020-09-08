@@ -29,3 +29,5 @@ jobs:
           key: circleci-java-span-{{ checksum "pom.xml" }}
 
       - run: mvn install
+
+      - run: mvn --settings ".circle.settings.xml" deploy
