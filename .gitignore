@@ -5,3 +5,4 @@ target/
 .settings/
 .span.iml
 span.iml
+.vscode/settings.json

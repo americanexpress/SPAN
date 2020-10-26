@@ -26,7 +26,7 @@ database syntax. 
 <dependency>
     <groupId>com.americanexpress.span</groupId>
     <artifactId>span</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
