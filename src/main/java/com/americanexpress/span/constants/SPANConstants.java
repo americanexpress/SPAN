@@ -15,6 +15,9 @@ package com.americanexpress.span.constants;
 
 public class SPANConstants {
     public static final String EMPTY_STRING = "";
+    public static final String DEFAULT_FILE_NAME = "SPANConfig";
+    public static final String APP_PROFILE = "APP_PROFILE";
+    public static final String YAML = ".yaml";
 
     private SPANConstants() {
     }
