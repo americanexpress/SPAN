@@ -12,10 +12,10 @@
  * the License.
  */
 package com.americanexpress.span.core.database.connection;
-
 import com.americanexpress.span.core.SPANConfigHolder;
 import com.americanexpress.span.core.SPANInitialization;
 import com.americanexpress.span.models.SPANConfig;
+import com.americanexpress.span.utility.PropertyConfiguration;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -42,7 +42,11 @@ public class SPANDataSourceTest {
     public void testInitialize() throws Exception {
         resetHoldSPANConfigForTesting();
 
-        SPANInitialization.initialize("SPANConfig.yaml");
+        SPANInitialization.initialize(new PropertyConfiguration() {
+            public String getSPANConfigFileName(){
+                return "SPANConfig.yaml";
+           }
+        });
         SPANConfig actualOutput = SPANConfigHolder.getInstance().getSPANConfig();
         SPANConfig expectedOutput = expectedOutput();
 
@@ -56,7 +60,11 @@ public class SPANDataSourceTest {
     public void testInitializeWithWrongDriverClass() throws Exception {
         resetHoldSPANConfigForTesting();
 
-        SPANInitialization.initialize("SPANConfigWithWrongDriverClass.yaml");
+        SPANInitialization.initialize(new PropertyConfiguration() {
+            public String getSPANConfigFileName(){
+                return "SPANConfigWithWrongDriverClass.yaml";
+           }
+        });
         SPANDataSource.getInstance();
 
     }
@@ -64,8 +72,11 @@ public class SPANDataSourceTest {
     @Test()
     public void testInitializeWithDriverClass() throws Exception {
         resetHoldSPANConfigForTesting();
-
-        SPANInitialization.initialize("SPANConfigWithDriverClass.yaml");
+        SPANInitialization.initialize(new PropertyConfiguration() {
+            public String getSPANConfigFileName(){
+                return "SPANConfigWithDriverClass.yaml";
+           }
+        });
         Assert.assertNotNull(SPANDataSource.getInstance());
 
     }

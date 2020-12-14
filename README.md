@@ -26,7 +26,7 @@ database syntax. 
 <dependency>
     <groupId>com.americanexpress.span</groupId>
     <artifactId>span</artifactId>
-    <version>1.1.0</version>
+    <version>1.3.0</version>
 </dependency>
 ```
 
@@ -42,10 +42,10 @@ SPAN follows either of the below approaches to read and load the
 configuration file: 
 
 1.  Developer creates the environment specific file which starts with
-    **\"SPANConfig\"**.
+    **\"SPANConfig\"**. If needed, developer can specify app profile environment variable by 
+    implementing PropertyConfiguration interface.
 
-2.  Developer passes the file name as a parameter to initialization
-    class. 
+2.  Developer provides the file name by implementing PropertyConfiguration interface, and pass the object of the class which implements the interface to initialization class. 
 
 Sample SPANConfig configuration file,
 

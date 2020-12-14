@@ -17,6 +17,7 @@ import com.americanexpress.span.annotation.Field;
 import com.americanexpress.span.core.SPANInitialization;
 import com.americanexpress.span.core.database.handlers.FieldTransformation;
 import com.americanexpress.span.exceptions.SPANException;
+import com.americanexpress.span.utility.PropertyConfiguration;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -791,7 +792,11 @@ public class OutputHandlerImplTest {
     @BeforeClass
     public static void beforeClass() throws IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
         resetHoldSPANConfigForTesting();
-        SPANInitialization.initialize("SPANConfig.yaml");
+        SPANInitialization.initialize(new PropertyConfiguration() {
+            public String getSPANConfigFileName(){
+                return "SPANConfig.yaml";
+           }
+        });
     }
 
     /**

@@ -83,8 +83,11 @@ public class ExpressionEvaluationTest extends TestCase {
     @Test
     public void testEvaluateExpressionEveluationStringFromSystemPropertiesFile() throws SPANException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException {
         resetHoldSPANConfigForTesting();
-        SPANInitialization.initialize("SampleSPANConfigWithProperties.yaml");
-
+        SPANInitialization.initialize(new PropertyConfiguration() {
+            public String getSPANConfigFileName(){
+                return "SampleSPANConfigWithProperties.yaml";
+           }
+        });
         String expression = "${databasepassword}";
         String result = expressionEvaluation.evaluate(expression);
         assertEquals(result, "test123");
