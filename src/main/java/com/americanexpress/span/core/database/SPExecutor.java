@@ -147,7 +147,7 @@ public class SPExecutor {
 
                 Map<Integer, Field> seqToField = getMappingFromSeqToField(SPANUtility.getUniqueAnnotationFieldsFromClass(returnType, com.americanexpress.span.annotation.ResultSet.class));
 
-                if (moreResults  && updateCount == -1 && !seqToField.isEmpty()) {
+                if (moreResults == false  && updateCount == -1 && !seqToField.isEmpty()) {
                     Field field = seqToField.get(1);
                     try {
                         field.setAccessible(true);

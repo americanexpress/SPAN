@@ -104,7 +104,8 @@ public class SPANDataSource {
             String connectURI = spanUserDefineKeyDetails.getDataSourceDetails().getUrl();
 
             if (isBlank(connectURI)) {
-                connectURI = DEFAULT_CONN + spanUserDefineKeyDetails.getDataSourceDetails().getHostName() +
+                String subProtocol = getSubProtocol(driverClassName);
+                connectURI = subProtocol + spanUserDefineKeyDetails.getDataSourceDetails().getHostName() +
                         COLON + spanUserDefineKeyDetails.getDataSourceDetails().getPort() +
                         SLASH + spanUserDefineKeyDetails.getDataSourceDetails().getDatabase();
             }
@@ -146,6 +147,25 @@ public class SPANDataSource {
         basicDataSource.addConnectionProperty("checkConnectionWhileIdle", String.valueOf(true));
 
         return basicDataSource;
+    }
+
+    /**
+     * This method returns sub protocol of a connection URI based on driver class name.
+     *
+     * @param driverClassName
+     * @return
+     */
+    private String getSubProtocol (String driverClassName){
+        String protocol ="";
+        // user can create a new pr if desired driverClassName is not listed below.
+        switch (driverClassName) {
+            case "com.ibm.db2.jcc.DB2Driver":
+                protocol = "jdbc:db2://";
+                break;
+            default:
+                protocol = DEFAULT_CONN;
+        }
+        return protocol;
     }
 
 }
