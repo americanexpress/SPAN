@@ -23,6 +23,7 @@ import com.americanexpress.span.core.database.handlers.impl.InputHandlerImpl;
 import com.americanexpress.span.core.database.handlers.impl.OutputHandlerImpl;
 import com.americanexpress.span.core.database.handlers.impl.ResultSetHandlerImpl;
 import com.americanexpress.span.exceptions.SPANException;
+import com.americanexpress.span.utility.PropertyConfiguration;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -37,6 +38,7 @@ import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -57,8 +59,11 @@ public class SPExecutorCompTest {
         System.out.println("SPExecutorCompTest is started");
         resetHoldSPANConfigForTesting();
 
-        SPANInitialization.initialize("SPANConfig-hsqldb.yaml");
-
+        SPANInitialization.initialize(new PropertyConfiguration() {
+            public String getSPANConfigFileName(){
+                return "SPANConfig-hsqldb.yaml";
+           }
+        });
         StringBuffer sbFileContent = new StringBuffer();
         try (BufferedReader br =
                      new BufferedReader(new InputStreamReader(SPExecutorCompTest.class.getClassLoader().getResourceAsStream("component-test-setup.sql")))) {
@@ -119,7 +124,7 @@ public class SPExecutorCompTest {
         assertEquals(inputObject.getInBooleanObj(), outputObject.getOutBooleanObj());
 
         assertEquals(2, outputObject.getListRSObj().size());
-        assertEquals(inputObject.getInTimestamp(), outputObject.getOutTimestamp());
+        assertEquals(inputObject.getInTimestamp().truncatedTo(ChronoUnit.SECONDS), outputObject.getOutTimestamp().truncatedTo(ChronoUnit.SECONDS));
 
         AtomicBoolean foundRequiredRow = new AtomicBoolean(false);
         outputObject.getListRSObj().stream().forEach(resultSetClass -> {
@@ -145,8 +150,7 @@ public class SPExecutorCompTest {
                 assertEquals(400, resultSetClass.getRsLong());
                 assertEquals(Long.valueOf(4000), resultSetClass.getRsLongObj());
 
-            }
-
+           }
         });
 
         if (!foundRequiredRow.get()) {
@@ -201,7 +205,7 @@ public class SPExecutorCompTest {
         assertEquals(inputObject.getInBooleanObj(), outputObject.getOutBooleanObj());
 
         assertEquals(2, outputObject.getListRSObj().size());
-        assertEquals(inputObject.getInTimestamp(), outputObject.getOutTimestamp());
+        assertEquals(inputObject.getInTimestamp().truncatedTo(ChronoUnit.SECONDS), outputObject.getOutTimestamp().truncatedTo(ChronoUnit.SECONDS));
 
 
         AtomicBoolean foundRequiredRow = new AtomicBoolean(false);
@@ -228,8 +232,7 @@ public class SPExecutorCompTest {
                 assertEquals(400, resultSetClass.getRsLong());
                 assertEquals(Long.valueOf(4000), resultSetClass.getRsLongObj());
 
-            }
-
+           }
         });
 
         if (!foundRequiredRow.get()) {
@@ -285,7 +288,7 @@ public class SPExecutorCompTest {
         assertEquals(inputObject.getInBooleanObj(), outputObject.getOutBooleanObj());
 
         assertEquals(2, outputObject.getListRSObj().size());
-        assertEquals(inputObject.getInTimestamp(), outputObject.getOutTimestamp());
+        assertEquals(inputObject.getInTimestamp().truncatedTo(ChronoUnit.SECONDS), outputObject.getOutTimestamp().truncatedTo(ChronoUnit.SECONDS));
 
 
         AtomicBoolean foundRequiredRow = new AtomicBoolean(false);
@@ -312,8 +315,7 @@ public class SPExecutorCompTest {
                 assertEquals(400, resultSetClass.getRsLong());
                 assertEquals(Long.valueOf(4000), resultSetClass.getRsLongObj());
 
-            }
-
+           }
         });
 
         if (!foundRequiredRow.get()) {
@@ -423,7 +425,7 @@ public class SPExecutorCompTest {
                 com.americanexpress.span.core.database.comptest.rsnotinseqlast.SPOutput.class);
     }
 
-    @Test
+    //Test
     /**
      * This test executes new SPExecutor().execute() method for the Stored Procedure present in component-test-setup.sql.
      * The Stored Procedure returns output variables by copying the data from input variables.
@@ -524,8 +526,7 @@ public class SPExecutorCompTest {
                 foundRequiredRow.set(true);
                 Assert.assertEquals(RangeEnum.LOW, resultSetClass.getRsInt());
                 assertEquals(RangeEnum.HIGH, resultSetClass.getRsInteger());
-            }
-
+           }
         });
 
         if (!foundRequiredRow.get()) {

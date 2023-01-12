@@ -18,6 +18,7 @@ import com.americanexpress.span.core.SPANConfigHolder;
 import com.americanexpress.span.core.SPANInitialization;
 import com.americanexpress.span.core.database.connection.SPANDataSource;
 import com.americanexpress.span.models.SPUserDefineKey;
+import com.americanexpress.span.utility.PropertyConfiguration;
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Strings;
 import org.apache.commons.lang3.StringUtils;
@@ -180,8 +181,11 @@ public class SPANCodeGenerator {
                 if (folderCreated) {
                     STD_ERR.println(outputCodeFolder + " created...");
                 }
-
-                SPANInitialization.initialize(configFile);
+                SPANInitialization.initialize(new PropertyConfiguration() {
+                    public String getSPANConfigFileName() {
+                        return configFile;
+                    }
+                });
                 createSPInputOutput(storedProcId);
 
                 String pojoInput = createGetterSetterPojo(inList, new ArrayList<>(), "SPInput");

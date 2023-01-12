@@ -17,6 +17,7 @@ import com.americanexpress.span.models.DataSourceDetails;
 import com.americanexpress.span.models.SPANConfig;
 import com.americanexpress.span.models.SPANUserDefineKeyDetails;
 import com.americanexpress.span.models.SPUserDefineKey;
+import com.americanexpress.span.utility.PropertyConfiguration;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
@@ -30,7 +31,13 @@ public class SPANConfigHolderTest {
     @Test
     public void testSPANConfigLoader() throws Exception {
         resetHoldSPANConfigForTesting();
-        SPANInitialization.initialize("SPANConfig.yaml");
+        SPANInitialization.initialize(new PropertyConfiguration() {
+            public String getSPANConfigFileName(){
+                return "SPANConfig.yaml";
+            }
+            @Override
+            public String getAppProfileEnvVariable() { return null;}
+        });
 
         SPANConfig spanConfig = SPANConfigHolder.getInstance().getSPANConfig();
 
@@ -44,7 +51,11 @@ public class SPANConfigHolderTest {
     @Test
     public void testSPANConfigHolderDataSource() throws Exception {
         resetHoldSPANConfigForTesting();
-        SPANInitialization.initialize("SPANConfig.yaml");
+        SPANInitialization.initialize(new PropertyConfiguration() {
+            public String getSPANConfigFileName(){
+                return "SPANConfig.yaml";
+           }
+        });
 
         DataSourceDetails dataSourceDetails = SPANConfigHolder.getInstance().getDataSourceDetails("PROC_ID_1");
 
@@ -60,7 +71,11 @@ public class SPANConfigHolderTest {
     public void testSPANConfigHolderSPUserName() throws Exception {
 
         resetHoldSPANConfigForTesting();
-        SPANInitialization.initialize("SPANConfig.yaml");
+        SPANInitialization.initialize(new PropertyConfiguration() {
+            public String getSPANConfigFileName(){
+                return "SPANConfig.yaml";
+           }
+        });
 
         SPUserDefineKey spUserDefinedKey = SPANConfigHolder.getInstance().getSPUserDefinedKey("PROC_ID_1");
 
@@ -75,7 +90,11 @@ public class SPANConfigHolderTest {
     public void testSPDetails() throws Exception {
 
         resetHoldSPANConfigForTesting();
-        SPANInitialization.initialize("SPANConfig.yaml");
+        SPANInitialization.initialize(new PropertyConfiguration() {
+            public String getSPANConfigFileName(){
+                return "SPANConfig.yaml";
+           }
+        });
 
         SPUserDefineKey spUserDefinedKey = SPANConfigHolder.getInstance().getSPUserDefinedKey("PROC_ID_1");
 
@@ -90,7 +109,11 @@ public class SPANConfigHolderTest {
     public void testSPANUserDefineKeyDetails() throws Exception {
 
         resetHoldSPANConfigForTesting();
-        SPANInitialization.initialize("SPANConfig.yaml");
+        SPANInitialization.initialize(new PropertyConfiguration() {
+            public String getSPANConfigFileName(){
+                return "SPANConfig.yaml";
+           }
+        });
 
         Map<String, SPANUserDefineKeyDetails> spUserDefinedKey = SPANConfigHolder.getInstance().getSPANConfig().getSpanUserDefineKeys();
 
@@ -99,8 +122,6 @@ public class SPANConfigHolderTest {
 
 
     }
-
-
 
     public static void resetHoldSPANConfigForTesting() throws ClassNotFoundException, IllegalAccessException, NoSuchFieldException {
         Field field = Class.forName("com.americanexpress.span.core.SPANConfigHolder$HoldSPANConfig").getDeclaredField("holdSPANConfig");
