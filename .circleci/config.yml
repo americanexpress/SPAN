@@ -30,4 +30,4 @@ jobs:
 
       - run: mvn install
 
-      - run: mvn --settings ".circle.settings.xml" deploy
+      - run: mvn --settings ".circleci/settings.xml" deploy
