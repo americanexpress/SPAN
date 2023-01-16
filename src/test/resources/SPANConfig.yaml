@@ -21,6 +21,8 @@ SPANConfig:
         database: "DB1"
         user: "test123"
         password: "pass123"
+        connectionProperties:
+          blockingReadConnectionTimeout: 5
       sp_details:
         PROC_ID_4:
           schema: "SCHEMA_ID"

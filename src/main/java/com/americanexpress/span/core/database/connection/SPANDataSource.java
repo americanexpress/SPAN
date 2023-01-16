@@ -145,6 +145,9 @@ public class SPANDataSource {
         basicDataSource.setRemoveAbandonedOnBorrow(true);
         basicDataSource.setRemoveAbandonedOnMaintenance(true);
         basicDataSource.addConnectionProperty("checkConnectionWhileIdle", String.valueOf(true));
+        if (Objects.nonNull(dataSourceDetails.getConnectionProperties())) {
+            dataSourceDetails.getConnectionProperties().forEach((k,v) -> basicDataSource.addConnectionProperty(k,v));
+        }
 
         return basicDataSource;
     }
