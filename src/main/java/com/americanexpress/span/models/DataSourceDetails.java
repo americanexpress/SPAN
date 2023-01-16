@@ -13,6 +13,8 @@
  */
 package com.americanexpress.span.models;
 
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -64,6 +66,14 @@ public class DataSourceDetails {
 
     @JsonProperty("driverClassName")
     private String driverClassName;
+
+     /**
+     * The connection properties that will be sent to our JDBC driver when establishing new connections.
+     * <strong>NOTE</strong> - The "user" and "password" properties will be passed explicitly, so they do not need to be
+     * included here.
+     */
+    @JsonProperty("connectionProperties")
+    private Map<String,String> connectionProperties ;
 
     public String getDriverClassName() {
         return driverClassName;
@@ -185,6 +195,22 @@ public class DataSourceDetails {
 
     public void setTimeBetweenEvictionRunsMillis(int timeBetweenEvictionRunsMillis) {
         this.timeBetweenEvictionRunsMillis = timeBetweenEvictionRunsMillis;
+    }
+
+    /**
+     * Adds a custom connection property to the set that will be passed to our JDBC driver. This <strong>MUST</strong>
+     * be called before the first connection is retrieved (along with all the other configuration property setters).
+     * Calls to this method after the connection pool has been initialized have no effect.
+     *
+     * @param name  Name of the custom connection property
+     * @param value Value of the custom connection property
+     */
+    public void setConnectionProperties(Map<String,String> connectionProperties) {
+        this.connectionProperties = connectionProperties;
+    }
+
+    public Map<String,String> getConnectionProperties() {
+        return connectionProperties;
     }
 
     @Override

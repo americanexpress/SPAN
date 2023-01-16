@@ -46,6 +46,7 @@ public class SPANConfigHolderTest {
         assertEquals(2,spanConfig.getSpanUserDefineKeys().get("SPAN-DB_ID_1").getSpUserDefineKeys().size());
         assertEquals("PROC_NAME_1",spanConfig.getSpanUserDefineKeys().get("SPAN-DB_ID_1").getSpUserDefineKeys().get("PROC_ID_4").getProcedure());
         assertNotNull(spanConfig.toString());
+        assertEquals(1, spanConfig.getSpanUserDefineKeys().get("SPAN-DB_ID_1").getDataSourceDetails().getConnectionProperties().size());
     }
 
     @Test

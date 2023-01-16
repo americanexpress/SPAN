@@ -6,3 +6,4 @@ target/
 .span.iml
 span.iml
 .vscode/settings.json
+src/test/.DS_Store
