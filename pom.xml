@@ -41,7 +41,7 @@
         <repository>
             <id>bintray-americanexpress-maven</id>
             <name>americanexpress-maven</name>
-            <url>https://api.bintray.com/maven/americanexpress/maven/com.americanexpress.span/;publish=1</url>
+            <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
         </repository>
     </distributionManagement>
 
