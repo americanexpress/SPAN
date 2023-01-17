@@ -18,6 +18,8 @@ jobs:
     steps:
       - checkout
 
+      - run: env
+
       - restore_cache:
           key: circleci-java-span-{{ checksum "pom.xml" }}
 
