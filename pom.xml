@@ -39,7 +39,7 @@
 
     <distributionManagement>
         <repository>
-            <id>bintray-americanexpress-maven</id>
+            <id>sonatype-americanexpress-maven</id>
             <name>americanexpress-maven</name>
             <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
         </repository>
